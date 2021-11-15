@@ -59,10 +59,16 @@ class ExperimentalConfig(Config):
             "msc3202_device_masquerading", False
         )
 
-        # Portion of MSC3202 related to transaction extensions:
+        # The portion of MSC3202 related to transaction extensions:
         # sending one-time key counts and fallback key usage to application services.
         self.msc3202_transaction_extensions: bool = experimental.get(
             "msc3202_transaction_extensions", False
+        )
+
+        # The portion of MSC3202 related to sending device list updates
+        # to application services.
+        self.msc3202_device_lists_enabled: bool = experimental.get(
+            "msc3202_device_lists", False
         )
 
         # MSC3706 (server-side support for partial state in /send_join responses)
