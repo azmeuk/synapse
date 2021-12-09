@@ -86,7 +86,7 @@ class AppServiceHandlerTestCase(unittest.TestCase):
     def test_query_user_exists_unknown_user(self):
         user_id = "@someone:anywhere"
         services = [self._mkservice(is_interested_in_event=True)]
-        services[0].is_interested_in_user.return_value = True
+        services[0].is_user_in_namespace.return_value = True
         self.mock_store.get_app_services.return_value = services
         self.mock_store.get_user_by_id.return_value = make_awaitable(None)
 
@@ -103,7 +103,7 @@ class AppServiceHandlerTestCase(unittest.TestCase):
     def test_query_user_exists_known_user(self):
         user_id = "@someone:anywhere"
         services = [self._mkservice(is_interested_in_event=True)]
-        services[0].is_interested_in_user.return_value = True
+        services[0].is_user_in_namespace.return_value = True
         self.mock_store.get_app_services.return_value = services
         self.mock_store.get_user_by_id.return_value = make_awaitable({"name": user_id})
 
@@ -474,6 +474,7 @@ class ApplicationServicesHandlerSendEventsTestCase(unittest.HomeserverTestCase):
             to_device_messages,
             _otks,
             _fbks,
+            _device_list_summary,
         ) = self.send_mock.call_args[0]
 
         # Assert that this was the same to-device message that local_user sent
@@ -586,7 +587,15 @@ class ApplicationServicesHandlerSendEventsTestCase(unittest.HomeserverTestCase):
         service_id_to_message_count: Dict[str, int] = {}
 
         for call in self.send_mock.call_args_list:
-            service, _events, _ephemeral, to_device_messages, _otks, _fbks = call[0]
+            (
+                service,
+                _events,
+                _ephemeral,
+                to_device_messages,
+                _otks,
+                _fbks,
+                _device_list_summary,
+            ) = call[0]
 
             # Check that this was made to an interested service
             self.assertIn(service, interested_appservices)
