@@ -1519,7 +1519,7 @@ url_preview = []
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "140849c54628dbc886eb94eb54bceddfef208bd95a853ecd7b10c2a0a81fb4ec"
+content-hash = "6c83283d009b38f491b6d8a09ecf9445425864795585832a6309aeae1bd68613"
 
 [metadata.files]
 appdirs = [

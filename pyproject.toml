@@ -152,7 +152,8 @@ netaddr = ">=0.7.18"
 # We require 3.x or higher for type hints. Previous guard was >= 2.9.
 Jinja2 = ">=3.0.0"
 bleach = ">=1.4.3"
-typing-extensions = ">=3.7.4"
+# We use `ParamSpec`, which was added in `typing-extensions` 3.10.0.0.
+typing-extensions = ">=3.10.0"
 # We enforce that we have a `cryptography` version that bundles an `openssl`
 # with the latest security patches.
 cryptography = ">=3.4.7"
