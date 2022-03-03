@@ -668,6 +668,7 @@ class RelationsTestCase(BaseRelationsTestCase):
                     RelationTypes.ANNOTATION,
                     RelationTypes.REFERENCE,
                     RelationTypes.THREAD,
+                    RelationTypes.UNSTABLE_THREAD,
                 ),
             )
 
