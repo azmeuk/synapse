@@ -78,9 +78,7 @@ include = [
     { path = "docs", format = "sdist" },
     { path = "INSTALL.md", format = "sdist" },
     { path = "mypy.ini", format = "sdist" },
-    { path = "scripts" },
     { path = "scripts-dev", format = "sdist" },
-    { path = "synctl", format = "sdist" },
     { path = "sytest-blacklist", format = "sdist" },
     { path = "tests", format = "sdist" },
     { path = "tox.ini", format = "sdist" },
@@ -91,10 +89,15 @@ include = [
 synapse_homeserver = "synapse.app.homeserver:main"
 synapse_worker = "synapse.app.generic_worker:main"
 
-# TODO work out how to handle
-#   scripts=["synctl"] + glob.glob("scripts/*")
-# from setuptools. Looks like scripts in the sense of setuptools not yet supported: see
-#   https://github.com/python-poetry/poetry/issues/2496
+export_signing_key = "synapse._scripts.export_signing_key:main"
+generate_config = "synapse._scripts.generate_config:main"
+generate_log_config = "synapse._scripts.generate_log_config:main"
+generate_signing_key = "synapse._scripts.generate_signing_key:main"
+hash_password = "synapse._scripts.hash_password:main"
+register_new_matrix_user = "synapse._scripts.register_new_matrix_user:main"
+synapse_port_db = "synapse._scripts.synapse_port_db:main"
+synapse_review_recent_signups = "synapse._scripts.review_recent_signups:main"
+update_synapse_database = "synapse._scripts.update_synapse_database:main"
 
 [tool.poetry.dependencies]
 python = "^3.7"
