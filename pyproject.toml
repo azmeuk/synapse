@@ -107,7 +107,13 @@ python = "^3.7"
 # we use the TYPE_CHECKER.redefine method added in jsonschema 3.0.0
 jsonschema = ">=3.0.0"
 # frozendict 2.1.2 is broken on Debian 10: https://github.com/Marco-Sulla/python-frozendict/issues/41
-frozendict = ">=1,!=2.1.2"
+# frozendict 1.x is broken on Python 3.10: it imports collections.Mapping, which was
+# replaced by collections.abc.Mapping, and deprecated in 3.10's release.
+frozendict = [
+    { version = "!=2.1.2" },
+    { version = ">=1", python = ">=3" },
+    { version = ">=2", python = ">=3.10" },
+]
 # We require 2.1.0 or higher for type hints. Previous guard was >= 1.1.0
 unpaddedbase64 = ">=2.1.0"
 canonicaljson = ">=1.4.0"
@@ -140,7 +146,12 @@ attrs = ">=19.2.0,!=21.1.0"
 netaddr = ">=0.7.18"
 # We require 3.x or higher for type hints. Previous guard was >= 2.9.
 Jinja2 = ">=3.0.0"
-bleach = ">=1.4.3"
+# Bleach 3.x fails to import on Python 3.10 prior to bleach 3.2.0. (Its vendored copy
+# of html5lib tried to import an ABC from collections instead of collections.abc.)
+bleach = [
+    { version = ">=1.4.3", python = ">=3" },
+    { version = ">=3.2.0", python = ">=3.10" },
+]
 # We use `ParamSpec`, which was added in `typing-extensions` 3.10.0.0.
 typing-extensions = ">=3.10.0"
 # We enforce that we have a `cryptography` version that bundles an `openssl`
