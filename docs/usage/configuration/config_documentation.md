@@ -2918,6 +2918,9 @@ Options for each entry include:
        * `email_template`: Jinja2 template for the email address of the user.
           If unset, no email address will be added to the account.
 
+       * `avatar_url_template`: Jinja2 template for the avatar URL of the user.
+          Defaults to [picture](https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims).
+
        * `extra_attributes`: a map of Jinja2 templates for extra attributes
           to send back to the client during login. Note that these are non-standard and clients will ignore them
           without modifications.
@@ -3023,7 +3026,7 @@ Options include:
    required login flows) is whitelisted in addition to any URLs in this list.
    By default, this list contains only the login fallback page.
 * `update_profile_information`: Use this setting to keep a user's profile fields in sync with information from
-   the identity provider. Currently only syncing the displayname is supported. Fields
+   the identity provider. Currently only syncing the displayname and the avatar is supported. Fields
    are checked on every SSO login, and are updated if necessary.
    Note that enabling this option will override user profile information,
    regardless of whether users have opted-out of syncing that

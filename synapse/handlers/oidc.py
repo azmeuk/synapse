@@ -1207,6 +1207,7 @@ class JinjaOidcMappingConfig:
     localpart_template: Optional[Template]
     display_name_template: Optional[Template]
     email_template: Optional[Template]
+    avatar_url_template: Optional[Template]
     extra_attributes: Dict[str, Template]
     confirm_localpart: bool = False
 
@@ -1235,6 +1236,7 @@ class JinjaOidcMappingProvider(OidcMappingProvider[JinjaOidcMappingConfig]):
         localpart_template = parse_template_config("localpart_template")
         display_name_template = parse_template_config("display_name_template")
         email_template = parse_template_config("email_template")
+        avatar_url_template = parse_template_config("avatar_url_template")
 
         extra_attributes = {}  # type Dict[str, Template]
         if "extra_attributes" in config:
@@ -1259,6 +1261,7 @@ class JinjaOidcMappingProvider(OidcMappingProvider[JinjaOidcMappingConfig]):
             localpart_template=localpart_template,
             display_name_template=display_name_template,
             email_template=email_template,
+            avatar_url_template=avatar_url_template,
             extra_attributes=extra_attributes,
             confirm_localpart=confirm_localpart,
         )

@@ -486,6 +486,20 @@ class SsoHandler:
                         await self._profile_handler.set_displayname(
                             user_id_obj, requester, attributes.display_name, True
                         )
+                if attributes.avatar_url:
+                    user_id_obj = UserID.from_string(user_id)
+                    profile_avatar_url = await self._profile_handler.get_avatar_url(
+                        user_id_obj
+                    )
+                    if profile_avatar_url != attributes.avatar_url:
+                        requester = create_requester(
+                            user_id,
+                            authenticated_entity=user_id,
+                        )
+                        await self._profile_handler.set_avatar_url(
+                            user_id_obj, requester, attributes.avatar_url, True
+                        )
+
 
         await self._auth_handler.complete_sso_login(
             user_id,

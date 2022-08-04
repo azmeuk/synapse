@@ -832,6 +832,7 @@ class OidcHandlerTestCase(HomeserverTestCase):
         userinfo: dict = {
             "sub": "test_user",
             "username": "test_user",
+            "picture": "https://foo.bar/test.img",
         }
         self.get_success(_make_callback_with_userinfo(self.hs, userinfo))
         auth_handler.complete_sso_login.assert_called_once_with(
